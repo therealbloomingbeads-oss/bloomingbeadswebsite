@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placeholder Image Generator - Blooming Beads</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #ff6b6b;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .placeholder {
+            width: 300px;
+            height: 200px;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .placeholder:hover {
+            transform: scale(1.05);
+        }
+        .download-btn {
+            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 10px;
+            font-weight: bold;
+        }
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+        .instructions {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Blooming Beads - Placeholder Images</h1>
+        
+        <div class="instructions">
+            <h3>Instructions:</h3>
+            <p>Click on any placeholder image below to download it. Save these images in an "images" folder in your website directory with the exact names shown.</p>
+        </div>
+
+        <div id="placeholders"></div>
+    </div>
+
+    <script>
+        const placeholders = [
+            { name: 'placeholder-icon.png', width: 100, height: 100, color: '#ff6b6b', text: 'LOGO' },
+            { name: 'hero-bracelet.jpg', width: 400, height: 300, color: '#feca57', text: 'HERO BRACELET' },
+            { name: 'bracelets-collection.jpg', width: 400, height: 250, color: '#ff9ff3', text: 'BRACELETS COLLECTION' },
+            { name: 'custom-bracelets.jpg', width: 400, height: 250, color: '#54a0ff', text: 'CUSTOM BRACELETS' },
+            { name: 'other-collection.jpg', width: 400, height: 250, color: '#5f27cd', text: 'OTHER THINGS' },
+            { name: 'bracelet-1.jpg', width: 300, height: 250, color: '#ff6b6b', text: 'BRACELET 1' },
+            { name: 'bracelet-2.jpg', width: 300, height: 250, color: '#feca57', text: 'BRACELET 2' },
+            { name: 'bracelet-3.jpg', width: 300, height: 250, color: '#ff9ff3', text: 'BRACELET 3' },
+            { name: 'bracelet-4.jpg', width: 300, height: 250, color: '#54a0ff', text: 'BRACELET 4' },
+            { name: 'about-image.jpg', width: 400, height: 300, color: '#5f27cd', text: 'ABOUT IMAGE' }
+        ];
+
+        const container = document.getElementById('placeholders');
+
+        placeholders.forEach(placeholder => {
+            const div = document.createElement('div');
+            div.style.cssText = `
+                width: ${placeholder.width}px;
+                height: ${placeholder.height}px;
+                background: ${placeholder.color};
+                margin: 20px auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-weight: bold;
+                border-radius: 10px;
+                cursor: pointer;
+                transition: transform 0.3s ease;
+                position: relative;
+            `;
+            div.textContent = placeholder.text;
+            
+            const downloadBtn = document.createElement('button');
+            downloadBtn.textContent = `Download ${placeholder.name}`;
+            downloadBtn.className = 'download-btn';
+            downloadBtn.style.cssText = `
+                position: absolute;
+                bottom: -50px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: linear-gradient(135deg, #ff6b6b, #feca57);
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 25px;
+                cursor: pointer;
+                font-weight: bold;
+            `;
+            
+            const wrapper = document.createElement('div');
+            wrapper.style.cssText = `
+                margin: 40px 0;
+                text-align: center;
+            `;
+            
+            wrapper.appendChild(div);
+            wrapper.appendChild(downloadBtn);
+            container.appendChild(wrapper);
+
+            downloadBtn.addEventListener('click', () => {
+                const canvas = document.createElement('canvas');
+                canvas.width = placeholder.width;
+                canvas.height = placeholder.height;
+                const ctx = canvas.getContext('2d');
+                
+                // Fill background
+                ctx.fillStyle = placeholder.color;
+                ctx.fillRect(0, 0, placeholder.width, placeholder.height);
+                
+                // Add text
+                ctx.fillStyle = 'white';
+                ctx.font = 'bold 20px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(placeholder.text, placeholder.width/2, placeholder.height/2);
+                
+                // Download
+                const link = document.createElement('a');
+                link.download = placeholder.name;
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        });
+    </script>
+</body>
+</html>

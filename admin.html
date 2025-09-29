@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Blooming Beads</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .admin-header {
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 15px;
+        }
+        
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ff6b9d;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .orders-section {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        
+        .order-item {
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: #f8f9fa;
+        }
+        
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .order-id {
+            font-weight: 600;
+            color: #ff6b9d;
+        }
+        
+        .order-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .order-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .detail-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #ff6b9d;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .detail-value {
+            color: #666;
+        }
+        
+        .no-orders {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+        
+        .back-to-site {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-to-site:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 157, 0.3);
+        }
+        
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .status-new {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+        
+        .status-processing {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+        
+        .status-completed {
+            background: #e8f5e8;
+            color: #388e3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <a href="index.html" class="back-to-site">
+            <i class="fas fa-arrow-left"></i> Back to Website
+        </a>
+        
+        <div class="admin-header">
+            <h1><i class="fas fa-cog"></i> Admin Panel</h1>
+            <p>Manage your custom orders and track business metrics</p>
+        </div>
+        
+        <div class="admin-stats">
+            <div class="stat-card">
+                <div class="stat-number" id="total-orders">0</div>
+                <div class="stat-label">Total Orders</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="new-orders">0</div>
+                <div class="stat-label">New Orders</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="processing-orders">0</div>
+                <div class="stat-label">Processing</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="completed-orders">0</div>
+                <div class="stat-label">Completed</div>
+            </div>
+        </div>
+        
+        <div class="orders-section">
+            <h2><i class="fas fa-list"></i> Custom Orders</h2>
+            <div id="orders-container">
+                <div class="no-orders">
+                    <i class="fas fa-inbox" style="font-size: 3rem; color: #ddd; margin-bottom: 20px;"></i>
+                    <h3>No orders yet</h3>
+                    <p>Custom orders will appear here when customers submit them.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="orders-section">
+            <h2><i class="fas fa-comments"></i> Customer Chat Messages</h2>
+            <div id="chat-messages-container">
+                <div class="no-orders">
+                    <i class="fas fa-comment" style="font-size: 3rem; color: #ddd; margin-bottom: 20px;"></i>
+                    <h3>No chat messages yet</h3>
+                    <p>Customer chat messages will appear here.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get orders data from localStorage
+        let customOrders = JSON.parse(localStorage.getItem('customOrders')) || [];
+        let regularOrders = JSON.parse(localStorage.getItem('orders')) || [];
+        let orders = [...customOrders, ...regularOrders];
+        
+        // Function to update statistics
+        function updateStats() {
+            const totalOrders = orders.length;
+            const newOrders = orders.filter(order => order.status === 'new').length;
+            const processingOrders = orders.filter(order => order.status === 'processing').length;
+            const completedOrders = orders.filter(order => order.status === 'completed').length;
+            
+            document.getElementById('total-orders').textContent = totalOrders;
+            document.getElementById('new-orders').textContent = newOrders;
+            document.getElementById('processing-orders').textContent = processingOrders;
+            document.getElementById('completed-orders').textContent = completedOrders;
+        }
+        
+        // Function to display orders
+        function displayOrders() {
+            const container = document.getElementById('orders-container');
+            
+            if (orders.length === 0) {
+                container.innerHTML = `
+                    <div class="no-orders">
+                        <i class="fas fa-inbox" style="font-size: 3rem; color: #ddd; margin-bottom: 20px;"></i>
+                        <h3>No orders yet</h3>
+                        <p>Custom orders will appear here when customers submit them.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = orders.map((order, index) => {
+                const isRegularOrder = order.items && order.items.length > 0;
+                const orderType = isRegularOrder ? 'Regular Order' : 'Custom Order';
+                
+                return `
+                    <div class="order-item">
+                        <div class="order-header">
+                            <div class="order-id">${orderType} #${String(index + 1).padStart(3, '0')}</div>
+                            <div class="order-date">${new Date(order.date).toLocaleDateString()}</div>
+                            <span class="status-badge status-${order.status}">${order.status.charAt(0).toUpperCase() + order.status.slice(1)}</span>
+                        </div>
+                        <div class="order-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Customer Name</div>
+                                <div class="detail-value">${order.customerName}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Email</div>
+                                <div class="detail-value">${order.customerEmail}</div>
+                            </div>
+                            ${isRegularOrder ? `
+                                <div class="detail-item">
+                                    <div class="detail-label">Phone</div>
+                                    <div class="detail-value">${order.customerPhone}</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Address</div>
+                                    <div class="detail-value">${order.customerAddress}</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Items</div>
+                                    <div class="detail-value">${order.items.length} item(s) - Total: $${order.total.toFixed(2)}</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Special Instructions</div>
+                                    <div class="detail-value">${order.specialInstructions || 'None'}</div>
+                                </div>
+                            ` : `
+                                <div class="detail-item">
+                                    <div class="detail-label">Bracelet Type</div>
+                                    <div class="detail-value">${order.braceletType}</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Color Combination</div>
+                                    <div class="detail-value">${order.colorCombo}</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Size</div>
+                                    <div class="detail-value">${order.size}</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Special Requests</div>
+                                    <div class="detail-value">${order.specialRequests || 'None'}</div>
+                                </div>
+                            `}
+                        </div>
+                        <div style="margin-top: 15px; display: flex; gap: 10px;">
+                            <button onclick="updateOrderStatus(${index}, 'processing')" class="status-badge status-processing" style="cursor: pointer; border: none;">
+                                Mark as Processing
+                            </button>
+                            <button onclick="updateOrderStatus(${index}, 'completed')" class="status-badge status-completed" style="cursor: pointer; border: none;">
+                                Mark as Completed
+                            </button>
+                            <button onclick="deleteOrder(${index})" style="background: #f44336; color: white; border: none; padding: 5px 12px; border-radius: 20px; cursor: pointer;">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // Function to update order status
+        function updateOrderStatus(index, newStatus) {
+            orders[index].status = newStatus;
+            
+            // Update the appropriate localStorage
+            if (orders[index].items) {
+                // Regular order
+                let regularOrders = JSON.parse(localStorage.getItem('orders')) || [];
+                const orderIndex = regularOrders.findIndex(o => o.id === orders[index].id);
+                if (orderIndex !== -1) {
+                    regularOrders[orderIndex].status = newStatus;
+                    localStorage.setItem('orders', JSON.stringify(regularOrders));
+                }
+            } else {
+                // Custom order
+                let customOrders = JSON.parse(localStorage.getItem('customOrders')) || [];
+                const orderIndex = customOrders.findIndex(o => o.id === orders[index].id);
+                if (orderIndex !== -1) {
+                    customOrders[orderIndex].status = newStatus;
+                    localStorage.setItem('customOrders', JSON.stringify(customOrders));
+                }
+            }
+            
+            updateStats();
+            displayOrders();
+        }
+        
+        // Function to delete order
+        function deleteOrder(index) {
+            if (confirm('Are you sure you want to delete this order?')) {
+                const orderToDelete = orders[index];
+                
+                // Remove from appropriate localStorage
+                if (orderToDelete.items) {
+                    // Regular order
+                    let regularOrders = JSON.parse(localStorage.getItem('orders')) || [];
+                    regularOrders = regularOrders.filter(o => o.id !== orderToDelete.id);
+                    localStorage.setItem('orders', JSON.stringify(regularOrders));
+                } else {
+                    // Custom order
+                    let customOrders = JSON.parse(localStorage.getItem('customOrders')) || [];
+                    customOrders = customOrders.filter(o => o.id !== orderToDelete.id);
+                    localStorage.setItem('customOrders', JSON.stringify(customOrders));
+                }
+                
+                orders.splice(index, 1);
+                updateStats();
+                displayOrders();
+            }
+        }
+        
+        function loadChatMessages() {
+            const chatMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
+            const container = document.getElementById('chat-messages-container');
+            
+            if (chatMessages.length === 0) {
+                container.innerHTML = `
+                    <div class="no-orders">
+                        <i class="fas fa-comment" style="font-size: 3rem; color: #ddd; margin-bottom: 20px;"></i>
+                        <h3>No chat messages yet</h3>
+                        <p>Customer chat messages will appear here.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = chatMessages.map((msg, index) => `
+                <div class="order-item">
+                    <div class="order-header">
+                        <div class="order-id">Chat Message #${String(index + 1).padStart(3, '0')}</div>
+                        <div class="order-date">${new Date(msg.timestamp).toLocaleDateString()}</div>
+                    </div>
+                    <div class="order-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Customer Name</div>
+                            <div class="detail-value">${msg.customerName}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Email</div>
+                            <div class="detail-value">${msg.customerEmail}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Message</div>
+                            <div class="detail-value">${msg.message}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Time</div>
+                            <div class="detail-value">${new Date(msg.timestamp).toLocaleString()}</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <button onclick="replyToCustomer('${msg.customerEmail}', '${msg.customerName}')" 
+                                style="background: #4CAF50; color: white; border: none; padding: 8px 16px; border-radius: 20px; cursor: pointer; margin-right: 10px;">
+                            Reply via Email
+                        </button>
+                        <button onclick="deleteChatMessage(${index})" 
+                                style="background: #f44336; color: white; border: none; padding: 8px 16px; border-radius: 20px; cursor: pointer;">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function replyToCustomer(email, name) {
+            const subject = `Re: Your message about Blooming Beads`;
+            const body = `Hi ${name},\n\nThank you for reaching out to us!\n\n`;
+            const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.open(mailtoLink);
+        }
+        
+        function deleteChatMessage(index) {
+            if (confirm('Are you sure you want to delete this chat message?')) {
+                const chatMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
+                chatMessages.splice(index, 1);
+                localStorage.setItem('chatMessages', JSON.stringify(chatMessages));
+                loadChatMessages();
+            }
+        }
+        
+        // Initialize the admin panel
+        updateStats();
+        displayOrders();
+        loadChatMessages();
+        
+        // Refresh data every 30 seconds
+        setInterval(() => {
+            customOrders = JSON.parse(localStorage.getItem('customOrders')) || [];
+            regularOrders = JSON.parse(localStorage.getItem('orders')) || [];
+            orders = [...customOrders, ...regularOrders];
+            updateStats();
+            displayOrders();
+            loadChatMessages();
+        }, 30000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blooming Beads - Handcrafted Jewelry</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <img src="images/logo.jpeg" alt="Blooming Beads" class="logo-img">
+                    <span class="logo-text">Blooming Beads</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#products" class="nav-link">Products</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                
+                <!-- Hidden Admin Navigation (only visible to admin) -->
+                <div class="admin-nav" id="adminNav" style="display: none;">
+                    <ul class="nav-menu">
+                        <li><a href="admin.html" class="nav-link admin-link">📊 Admin Panel</a></li>
+                        <li><a href="#custom-bracelets" class="nav-link admin-link">📝 View Orders</a></li>
+                        <li><a href="#" class="nav-link admin-link" onclick="toggleAdminMode()">🔒 Hide Admin</a></li>
+                    </ul>
+                </div>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Secret Admin Trigger Button (invisible to customers) -->
+    <button class="admin-trigger" onclick="toggleAdminMode()" title="Admin Access"></button>
+
+    <!-- Shopping Cart Button -->
+    <div class="cart-container">
+        <button class="cart-button" onclick="toggleCart()" title="Shopping Cart">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count" id="cartCount">0</span>
+        </button>
+        
+        <!-- Cart Dropdown -->
+        <div class="cart-dropdown" id="cartDropdown">
+            <div class="cart-header">
+                <h3>Shopping Cart</h3>
+                <button class="close-cart" onclick="toggleCart()">×</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <div class="empty-cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <p>Your cart is empty</p>
+                </div>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <strong>Total: $<span id="cartTotal">0.00</span></strong>
+                </div>
+                <button class="checkout-btn" onclick="proceedToCheckout()" disabled>
+                    Proceed to Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Bell -->
+
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-logo">
+                <img src="images/logo.jpeg" alt="Blooming Beads Logo" class="hero-logo-img">
+            </div>
+            <h1 class="hero-title">Handcrafted with Love</h1>
+            <p class="hero-subtitle">Discover our beautiful collection of beaded jewelry</p>
+            <a href="#products" class="cta-button">Shop Now</a>
+        </div>
+        <div class="hero-image">
+            <img src="images/8779.jpg" alt="Beautiful beaded bracelet" class="hero-img">
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="products" class="categories">
+        <div class="container">
+            <h2 class="section-title">Our Collections</h2>
+            <div class="categories-grid">
+                <!-- Bracelets Category -->
+                <div class="category-card">
+                    <div class="category-image">
+                        <img src="images/Rainbow-Claybead.jpeg" alt="Bracelets Collection" class="category-img">
+                    </div>
+                    <div class="category-content">
+                        <h3 class="category-title">Bracelets</h3>
+                        <p class="category-description">Beautiful handcrafted bracelets in various styles and materials</p>
+                        <div class="subcategories">
+                            <a href="clay-beads.html" class="subcategory-link">Clay Beads</a>
+                            <a href="glass-beads.html" class="subcategory-link">Glass Beads</a>
+                            <a href="pearl-bracelets.html" class="subcategory-link">Pearl Bracelets</a>
+                            <a href="loom-bracelets.html" class="subcategory-link">Loom Bracelets</a>
+                            <a href="charm-bracelets.html" class="subcategory-link">Seed Bead Bracelets</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom Bracelets Category -->
+                <div class="category-card">
+                    <div class="category-image">
+                        <img src="images/Pearl-Set.jpeg" alt="Custom Bracelets Collection" class="category-img">
+                    </div>
+                    <div class="category-content">
+                        <h3 class="category-title">Custom Bracelets</h3>
+                        <p class="category-description">Personalized bracelets made just for you</p>
+                        <a href="#custom-bracelets" class="subcategory-link">Order Custom</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products">
+        <div class="container">
+            <h2 class="section-title">Featured Bracelets</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Sunset-SeedBead.jpeg" alt="Sunset Seed Bead Bracelet" class="product-img">
+                        <button class="quick-add-cart" onclick="addToCart('Sunset Seed Bead Bracelet', 2.00, 'images/Sunset-SeedBead.jpeg')" title="Add to Cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Sunset Seed Bead Bracelet</h3>
+                        <p class="product-description">Handcrafted with seed beads in warm sunset colors</p>
+                        <div class="product-price-row">
+                            <span class="product-price">$2.00</span>
+                            <button class="add-to-cart-btn" onclick="addToCart('Sunset Seed Bead Bracelet', 2.00, 'images/Sunset-SeedBead.jpeg')">
+                                <i class="fas fa-plus"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Blue-White-SeedBead.jpeg" alt="Blue White Seed Bead Bracelet" class="product-img">
+                        <button class="quick-add-cart" onclick="addToCart('Blue White Seed Bead Bracelet', 2.00, 'images/Blue-White-SeedBead.jpeg')" title="Add to Cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Blue White Seed Bead Bracelet</h3>
+                        <p class="product-description">Elegant seed beads in soothing blue and white tones</p>
+                        <div class="product-price-row">
+                            <span class="product-price">$2.00</span>
+                            <button class="add-to-cart-btn" onclick="addToCart('Blue White Seed Bead Bracelet', 2.00, 'images/Blue-White-SeedBead.jpeg')">
+                                <i class="fas fa-plus"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Pink-Bloom-ClayBead.jpeg" alt="Pink Bloom Clay Bead Bracelet" class="product-img">
+                        <button class="quick-add-cart" onclick="addToCart('Pink Bloom Clay Bead Bracelet', 2.99, 'images/Pink-Bloom-ClayBead.jpeg')" title="Add to Cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Pink Bloom Clay Bead Bracelet</h3>
+                        <p class="product-description">Beautiful clay beads with pink bloom design</p>
+                        <div class="product-price-row">
+                            <span class="product-price">$2.99</span>
+                            <button class="add-to-cart-btn" onclick="addToCart('Pink Bloom Clay Bead Bracelet', 2.99, 'images/Pink-Bloom-ClayBead.jpeg')">
+                                <i class="fas fa-plus"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Rainbow-Starfish-ClayBead.jpeg" alt="Rainbow Starfish Clay Bead Bracelet" class="product-img">
+                        <button class="quick-add-cart" onclick="addToCart('Rainbow Starfish Clay Bead Bracelet', 2.99, 'images/Rainbow-Starfish-ClayBead.jpeg')" title="Add to Cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Rainbow Starfish Clay Bead Bracelet</h3>
+                        <p class="product-description">Colorful clay beads with starfish design</p>
+                        <div class="product-price-row">
+                            <span class="product-price">$2.99</span>
+                            <button class="add-to-cart-btn" onclick="addToCart('Rainbow Starfish Clay Bead Bracelet', 2.99, 'images/Rainbow-Starfish-ClayBead.jpeg')">
+                                <i class="fas fa-plus"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Order Section -->
+    <section id="custom-bracelets" class="custom-order">
+        <div class="container">
+            <h2 class="section-title">Order Custom Bracelet</h2>
+            <p style="text-align: center; font-size: 1.2rem; color: #666; max-width: 600px; margin: 0 auto 40px;">
+                Create your perfect bracelet with our custom order form
+            </p>
+            <div class="custom-form-container">
+                <form class="custom-order-form">
+                    <div class="form-group">
+                        <label for="bracelet-type">Bracelet Type:</label>
+                        <select id="bracelet-type" name="bracelet-type" required>
+                            <option value="">Select a bracelet type</option>
+                            <option value="seed-bead">Seed Bead</option>
+                            <option value="clay-bead">Clay Bead</option>
+                            <option value="loom-bead">Loom Bead</option>
+                            <option value="glass-bead">Glass Bead</option>
+                            <option value="pearl-bead">Pearl Bead</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="color-combo">Color Combination:</label>
+                        <input type="text" id="color-combo" name="color-combo" placeholder="e.g., Pink and White, Blue and Purple, Rainbow" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="size">Size:</label>
+                        <select id="size" name="size" required>
+                            <option value="">Select size</option>
+                            <option value="small">Small (6 inches)</option>
+                            <option value="medium">Medium (7 inches)</option>
+                            <option value="large">Large (8 inches)</option>
+                            <option value="custom">Custom Size</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="special-requests">Special Requests:</label>
+                        <textarea id="special-requests" name="special-requests" rows="4" placeholder="Any specific details, charms, or special requests..."></textarea>
+                    </div>
+                    
+                    
+                    <button type="button" id="customOrderButton" class="submit-button">Proceed to Checkout</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 class="section-title">About Blooming Beads</h2>
+                    <p>Welcome to Blooming Beads! We create handcrafted jewelry that levels up your style with uniqie pieces that will match every outfit from casual to elegant. Each bracelet is carefully crafted with love and attention to every detail.</p>
+                    <p>Our collection features beautiful beads, unique charms, and one-of-a-kind pieces that will add a touch of style to any outfit. Whether you're looking for a special gift or treating yourself, we have something perfect for you.</p>
+                </div>
+                <div class="about-image">
+                    <img src="images/8779.jpg" alt="Beautiful hibiscus flower" class="about-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get in Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>therealbloomingbeads@gmail.com</span>
+                    </div>
+                    
+              
+                  
+                </div>
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" rows="5" required></textarea>
+                    <button type="submit" class="submit-button">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Blooming Beads</h3>
+                    <p>Handcrafted jewelry made with love and care.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="https://instagram.com/bloomingbeadsxoxo" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://tiktok.com/@blooming.beadsss" target="_blank"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://snapchat.com/add/bloomingbeadsxo" target="_blank"><i class="fab fa-snapchat-ghost"></i></a>
+                        <a href="https://youtube.com/@bloomingbeads" target="_blank"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Blooming Beads. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Handle custom order form submission
+        document.addEventListener('DOMContentLoaded', function() {
+            const customOrderForm = document.querySelector('.custom-order-form');
+            
+            if (customOrderForm) {
+                customOrderForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form data
+                    const formData = new FormData(customOrderForm);
+                    const orderData = {
+                        id: Date.now(), // Simple ID generation
+                        date: new Date().toISOString(),
+                        customerName: formData.get('customer-name'),
+                        customerEmail: formData.get('customer-email'),
+                        braceletType: formData.get('bracelet-type'),
+                        colorCombo: formData.get('color-combo'),
+                        size: formData.get('size'),
+                        specialRequests: formData.get('special-requests'),
+                        status: 'new'
+                    };
+                    
+                    // Save to localStorage
+                    let orders = JSON.parse(localStorage.getItem('customOrders')) || [];
+                    orders.push(orderData);
+                    localStorage.setItem('customOrders', JSON.stringify(orders));
+                    
+                    // Show success message
+                    alert('Thank you! Your custom order has been submitted successfully. We will contact you soon!');
+                    
+                    // Reset form
+                    customOrderForm.reset();
+                    
+                    // Scroll to top
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+        });
+        
+        // Admin mode functionality
+        function toggleAdminMode() {
+            const body = document.body;
+            const adminNav = document.getElementById('adminNav');
+            
+            if (body.classList.contains('admin-mode-active')) {
+                // Hide admin mode
+                body.classList.remove('admin-mode-active');
+                adminNav.style.display = 'none';
+                localStorage.setItem('adminMode', 'false');
+            } else {
+                // Show admin mode
+                body.classList.add('admin-mode-active');
+                adminNav.style.display = 'block';
+                localStorage.setItem('adminMode', 'true');
+            }
+        }
+        
+        // Check if admin mode should be active on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const adminMode = localStorage.getItem('adminMode');
+            if (adminMode === 'true') {
+                document.body.classList.add('admin-mode-active');
+                document.getElementById('adminNav').style.display = 'block';
+            }
+            
+        });
+        
+        // Handle custom order form
+        document.getElementById('customOrderButton').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(document.querySelector('.custom-order-form'));
+            
+            // Create custom order item
+            const customOrder = {
+                id: 'custom-' + Date.now(),
+                name: `Custom ${formData.get('bracelet-type')} Bracelet`,
+                price: 0, // Will be calculated by owner
+                quantity: 1,
+                image: 'images/Pearl-Set.jpeg', // Default image
+                type: 'custom',
+                details: {
+                    braceletType: formData.get('bracelet-type'),
+                    colorCombo: formData.get('color-combo'),
+                    size: formData.get('size'),
+                    specialRequests: formData.get('special-requests')
+                }
+            };
+            
+            // Store custom order in localStorage
+            localStorage.setItem('customOrder', JSON.stringify(customOrder));
+            
+            // Redirect to checkout page
+            window.location.href = 'checkout.html';
+        });
+        
+    </script>
+</body>
+</html>

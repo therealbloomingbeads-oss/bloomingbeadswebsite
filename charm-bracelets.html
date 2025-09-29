@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seed Bead Bracelets - Blooming Beads</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <img src="images/logo.jpeg" alt="Blooming Beads" class="logo-img">
+                    <span class="logo-text">Blooming Beads</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html#home" class="nav-link">Home</a></li>
+                    <li><a href="index.html#products" class="nav-link">Products</a></li>
+                    <li><a href="index.html#about" class="nav-link">About</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Shopping Cart Button -->
+    <div class="cart-container">
+        <button class="cart-button" onclick="toggleCart()" title="Shopping Cart">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count" id="cartCount">0</span>
+        </button>
+        
+        <!-- Cart Dropdown -->
+        <div class="cart-dropdown" id="cartDropdown">
+            <div class="cart-header">
+                <h3>Shopping Cart</h3>
+                <button class="close-cart" onclick="toggleCart()">×</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <div class="empty-cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <p>Your cart is empty</p>
+                </div>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <strong>Total: $<span id="cartTotal">0.00</span></strong>
+                </div>
+                <button class="checkout-btn" onclick="proceedToCheckout()" disabled>
+                    Proceed to Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Category Header -->
+    <section class="category-header" style="padding-top: 120px; padding-bottom: 60px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+        <div class="container">
+            <h1 class="section-title">Seed Bead Bracelets</h1>
+            <p style="text-align: center; font-size: 1.2rem; color: #666; max-width: 600px; margin: 0 auto;">
+                Beautiful seed bead bracelets with unique designs and elegant details
+            </p>
+        </div>
+    </section>
+
+    <!-- Charm Bracelets Products -->
+    <section class="featured-products">
+        <div class="container">
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Pink-White-SeedBead.jpeg" alt="Pink White Seed Bead Bracelet" class="product-img">
+                        <button class="quick-add-cart" onclick="addToCart('Valentines Day Seed Bead Bracelet', 1.50, 'images/Pink-White-SeedBead.jpeg')" title="Add to Cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Valentines Day Seed Bead Bracelet</h3>
+                        <p class="product-description">Beautiful seed beads in pink and white combination</p>
+                        <span class="product-price">$1.50</span>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Yellow-White-SeedBead.jpeg" alt="Yellow White Seed Bead Bracelet" class="product-img">
+                        <button class="quick-add-cart" onclick="addToCart('Sunshine Seed Bead Bracelet', 1.50, 'images/Yellow-White-SeedBead.jpeg')" title="Add to Cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Sunshine Seed Bead Bracelet</h3>
+                        <p class="product-description">Beautiful seed beads in yellow and white combination</p>
+                        <span class="product-price">$1.50</span>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Pink-Blue-White-SeedBead.jpeg" alt="Pink Blue White Seed Bead Bracelet" class="product-img">
+                        <button class="quick-add-cart" onclick="addToCart('Berry Blast Seed Bead Bracelet', 1.50, 'images/Pink-Blue-White-SeedBead.jpeg')" title="Add to Cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Berry Blast Seed Bead Bracelet</h3>
+                        <p class="product-description">Beautiful seed beads in pink, blue, and white combination</p>
+                        <span class="product-price">$1.50</span>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Metalic-Pink-White-SeedBead.jpeg" alt="Metallic Pink White Seed Bead Bracelet" class="product-img">
+                        <button class="quick-add-cart" onclick="addToCart('Metallic Pink Seed Bead Bracelet', 1.50, 'images/Metalic-Pink-White-SeedBead.jpeg')" title="Add to Cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Metallic Pink Seed Bead Bracelet</h3>
+                        <p class="product-description">Beautiful metallic seed beads in pink and white combination</p>
+                        <span class="product-price">$1.50</span>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Pink-Blue-SeedBead.jpeg" alt="Pink Blue Seed Bead Bracelet" class="product-img">
+                        <button class="quick-add-cart" onclick="addToCart('Cotton Candy Seed Bead Bracelet', 1.50, 'images/Pink-Blue-SeedBead.jpeg')" title="Add to Cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Cotton Candy Seed Bead Bracelet</h3>
+                        <p class="product-description">Beautiful seed beads in pink and blue combination</p>
+                        <span class="product-price">$1.50</span>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Red-Orange-SeedBead.jpeg" alt="Red Orange Seed Bead Bracelet" class="product-img">
+                        <button class="quick-add-cart" onclick="addToCart('Flame Seed Bead Bracelet', 1.50, 'images/Red-Orange-SeedBead.jpeg')" title="Add to Cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Flame Seed Bead Bracelet</h3>
+                        <p class="product-description">Beautiful seed beads in red and orange combination</p>
+                        <span class="product-price">$1.50</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to Categories -->
+    <section style="padding: 40px 0; background: white;">
+        <div class="container" style="text-align: center;">
+            <a href="index.html#products" class="cta-button" style="text-decoration: none;">← Back to All Categories</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Blooming Beads</h3>
+                    <p>Handcrafted jewelry made with love and care.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html#home">Home</a></li>
+                        <li><a href="index.html#products">Products</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Blooming Beads. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

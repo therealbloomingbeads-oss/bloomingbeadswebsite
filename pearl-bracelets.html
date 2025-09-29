@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pearl Bracelets - Blooming Beads</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <img src="images/logo.jpeg" alt="Blooming Beads" class="logo-img">
+                    <span class="logo-text">Blooming Beads</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html#home" class="nav-link">Home</a></li>
+                    <li><a href="index.html#products" class="nav-link">Products</a></li>
+                    <li><a href="index.html#about" class="nav-link">About</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Shopping Cart Button -->
+    <div class="cart-container">
+        <button class="cart-button" onclick="toggleCart()" title="Shopping Cart">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count" id="cartCount">0</span>
+        </button>
+        
+        <!-- Cart Dropdown -->
+        <div class="cart-dropdown" id="cartDropdown">
+            <div class="cart-header">
+                <h3>Shopping Cart</h3>
+                <button class="close-cart" onclick="toggleCart()">×</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <div class="empty-cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <p>Your cart is empty</p>
+                </div>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <strong>Total: $<span id="cartTotal">0.00</span></strong>
+                </div>
+                <button class="checkout-btn" onclick="proceedToCheckout()" disabled>
+                    Proceed to Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Category Header -->
+    <section class="category-header" style="padding-top: 120px; padding-bottom: 60px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+        <div class="container">
+            <h1 class="section-title">Pearl Bracelets</h1>
+            <p style="text-align: center; font-size: 1.2rem; color: #666; max-width: 600px; margin: 0 auto;">
+                Elegant pearl bracelets with beautiful designs and premium quality
+            </p>
+        </div>
+    </section>
+
+    <!-- Pearl Bracelets Products -->
+    <section class="featured-products">
+        <div class="container">
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Pearl-Set.jpeg" alt="Pearl Set Bracelet" class="product-img">
+                        <button class="quick-add-cart" onclick="addToCart('Pearl Set Bracelet', 7.00, 'images/Pearl-Set.jpeg')" title="Add to Cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Pearl Set Bracelet</h3>
+                        <p class="product-description">Beautiful pearl set with elegant design</p>
+                        <span class="product-price">$7.00</span>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Blue-GummyBear-Pearl.jpeg" alt="Blue Gummy Bear Pearl Bracelet" class="product-img">
+                        <button class="quick-add-cart" onclick="addToCart('Blue Gummy Bear Pearl Bracelet', 1.50, 'images/Blue-GummyBear-Pearl.jpeg')" title="Add to Cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Blue Gummy Bear Pearl Bracelet</h3>
+                        <p class="product-description">Beautiful pearl beads with blue gummy bear design</p>
+                        <span class="product-price">$1.50</span>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Purple-GummyBear-Pearl.jpeg" alt="Purple Gummy Bear Pearl Bracelet" class="product-img">
+                        <button class="quick-add-cart" onclick="addToCart('Purple Gummy Bear Pearl Bracelet', 1.50, 'images/Purple-GummyBear-Pearl.jpeg')" title="Add to Cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Purple Gummy Bear Pearl Bracelet</h3>
+                        <p class="product-description">Beautiful pearl beads with purple gummy bear design</p>
+                        <span class="product-price">$1.50</span>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Extra-Small-Pearl.jpeg" alt="Extra Small Pearl Bracelet" class="product-img">
+                        <button class="quick-add-cart" onclick="addToCart('Extra Small Pearl Bracelet', 1.50, 'images/Extra-Small-Pearl.jpeg')" title="Add to Cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Extra Small Pearl Bracelet</h3>
+                        <p class="product-description">Delicate extra small pearl beads</p>
+                        <span class="product-price">$1.50</span>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Small-Pearl.jpeg" alt="Small Pearl Bracelet" class="product-img">
+                        <button class="quick-add-cart" onclick="addToCart('Small Pearl Bracelet', 1.50, 'images/Small-Pearl.jpeg')" title="Add to Cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Small Pearl Bracelet</h3>
+                        <p class="product-description">Elegant small pearl beads</p>
+                        <span class="product-price">$1.50</span>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Medium-Pearl.jpeg" alt="Medium Pearl Bracelet" class="product-img">
+                        <button class="quick-add-cart" onclick="addToCart('Medium Pearl Bracelet', 1.50, 'images/Medium-Pearl.jpeg')" title="Add to Cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Medium Pearl Bracelet</h3>
+                        <p class="product-description">Classic medium pearl beads</p>
+                        <span class="product-price">$1.50</span>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Large-Pearl.jpeg" alt="Large Pearl Bracelet" class="product-img">
+                        <button class="quick-add-cart" onclick="addToCart('Large Pearl Bracelet', 1.50, 'images/Large-Pearl.jpeg')" title="Add to Cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Large Pearl Bracelet</h3>
+                        <p class="product-description">Stunning large pearl beads</p>
+                        <span class="product-price">$1.50</span>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Extra-Large-Pearl.jpeg" alt="Extra Large Pearl Bracelet" class="product-img">
+                        <button class="quick-add-cart" onclick="addToCart('Extra Large Pearl Bracelet', 1.50, 'images/Extra-Large-Pearl.jpeg')" title="Add to Cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Extra Large Pearl Bracelet</h3>
+                        <p class="product-description">Bold extra large pearl beads</p>
+                        <span class="product-price">$1.50</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to Categories -->
+    <section style="padding: 40px 0; background: white;">
+        <div class="container" style="text-align: center;">
+            <a href="index.html#products" class="cta-button" style="text-decoration: none;">← Back to All Categories</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Blooming Beads</h3>
+                    <p>Handcrafted jewelry made with love and care.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html#home">Home</a></li>
+                        <li><a href="index.html#products">Products</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="https://instagram.com/bloomingbeadsxoxo" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://tiktok.com/@blooming.beadsss" target="_blank"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://snapchat.com/add/bloomingbeadsxo" target="_blank"><i class="fab fa-snapchat-ghost"></i></a>
+                        <a href="https://youtube.com/@bloomingbeads" target="_blank"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Blooming Beads. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

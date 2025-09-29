@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clay Beads Bracelets - Blooming Beads</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <img src="images/logo.jpeg" alt="Blooming Beads" class="logo-img">
+                    <span class="logo-text">Blooming Beads</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html#home" class="nav-link">Home</a></li>
+                    <li><a href="index.html#products" class="nav-link">Products</a></li>
+                    <li><a href="index.html#about" class="nav-link">About</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Shopping Cart Button -->
+    <div class="cart-container">
+        <button class="cart-button" onclick="toggleCart()" title="Shopping Cart">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count" id="cartCount">0</span>
+        </button>
+        
+        <!-- Cart Dropdown -->
+        <div class="cart-dropdown" id="cartDropdown">
+            <div class="cart-header">
+                <h3>Shopping Cart</h3>
+                <button class="close-cart" onclick="toggleCart()">×</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <div class="empty-cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <p>Your cart is empty</p>
+                </div>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <strong>Total: $<span id="cartTotal">0.00</span></strong>
+                </div>
+                <button class="checkout-btn" onclick="proceedToCheckout()" disabled>
+                    Proceed to Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Category Header -->
+    <section class="category-header" style="padding-top: 120px; padding-bottom: 60px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+        <div class="container">
+            <h1 class="section-title">Clay Beads Bracelets</h1>
+            <p style="text-align: center; font-size: 1.2rem; color: #666; max-width: 600px; margin: 0 auto;">
+                Beautiful handcrafted bracelets featuring unique clay beads in vibrant colors and textures
+            </p>
+        </div>
+    </section>
+
+    <!-- Clay Beads Products -->
+    <section class="featured-products">
+        <div class="container">
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Berry-Claybead.jpeg" alt="Berry Clay Bead Bracelet" class="product-img">
+                        <button class="quick-add-cart" onclick="addToCart('Berry Clay Bead Bracelet', 2.00, 'images/Berry-Claybead.jpeg')" title="Add to Cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Berry Clay Bead Bracelet</h3>
+                        <p class="product-description">Beautiful clay beads in berry tones with natural texture</p>
+                        <span class="product-price">$2.00</span>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Sunset-ClayBead.JPG" alt="Sunset Clay Bead Bracelet" class="product-img">
+                        <button class="quick-add-cart" onclick="addToCart('Sunset Clay Bead Bracelet', 2.00, 'images/Sunset-ClayBead.JPG')" title="Add to Cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Sunset Clay Bead Bracelet</h3>
+                        <p class="product-description">Warm clay beads in beautiful sunset colors</p>
+                        <span class="product-price">$2.00</span>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Diff-Shades-Blue-ClayBead.JPG" alt="Different Shades Blue Clay Bead Bracelet" class="product-img">
+                        <button class="quick-add-cart" onclick="addToCart('Blueberry Clay Bead Bracelet', 2.00, 'images/Diff-Shades-Blue-ClayBead.JPG')" title="Add to Cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Blueberry Clay Bead Bracelet</h3>
+                        <p class="product-description">Beautiful clay beads in various shades of blue</p>
+                        <span class="product-price">$2.00</span>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Pink-Lemonade_ClayBead.JPG" alt="Pink Lemonade Clay Bead Bracelet" class="product-img">
+                        <button class="quick-add-cart" onclick="addToCart('Pink Lemonade Clay Bead Bracelet', 2.00, 'images/Pink-Lemonade_ClayBead.JPG')" title="Add to Cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Pink Lemonade Clay Bead Bracelet</h3>
+                        <p class="product-description">Refreshing pink and yellow clay beads</p>
+                        <span class="product-price">$2.00</span>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Purple-Yellow-Blue-Pink-heart-ClayBead.JPG" alt="Purple Yellow Blue Pink Heart Clay Bead Bracelet" class="product-img">
+                        <button class="quick-add-cart" onclick="addToCart('Daydream Clay Bead Bracelet', 2.00, 'images/Purple-Yellow-Blue-Pink-heart-ClayBead.JPG')" title="Add to Cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Daydream Clay Bead Bracelet</h3>
+                        <p class="product-description">Colorful clay beads with heart design in multiple colors</p>
+                        <span class="product-price">$2.00</span>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Blue-White-Star-ClayBead.JPG" alt="Blue White Star Clay Bead Bracelet" class="product-img">
+                        <button class="quick-add-cart" onclick="addToCart('Cloudy Sky Clay Bead Bracelet', 2.00, 'images/Blue-White-Star-ClayBead.JPG')" title="Add to Cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Cloudy Sky Clay Bead Bracelet</h3>
+                        <p class="product-description">Beautiful clay beads with star design in blue and white</p>
+                        <span class="product-price">$2.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to Categories -->
+    <section style="padding: 40px 0; background: white;">
+        <div class="container" style="text-align: center;">
+            <a href="index.html#products" class="cta-button" style="text-decoration: none;">← Back to All Categories</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Blooming Beads</h3>
+                    <p>Handcrafted jewelry made with love and care.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html#home">Home</a></li>
+                        <li><a href="index.html#products">Products</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Blooming Beads. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        
+        
+        // Chat Functions
+        function toggleChat() {
+            const chatContainer = document.getElementById('chatContainer');
+            if (chatContainer) {
+                chatContainer.classList.toggle('show');
+            }
+            
+            // Hide chat badge when chat is open
+            const chatBadge = document.getElementById('chatBadge');
+            if (chatContainer.classList.contains('show')) {
+                document.getElementById('chatBadge').style.display = 'none';
+            }
+        }
+        
+        function sendMessage() {
+            const chatInput = document.getElementById('chatInput');
+            const message = chatInput.value.trim();
+            
+            if (message === '') return;
+            
+            // Add customer message
+            addMessage(message, 'customer');
+            chatInput.value = '';
+            
+            // Send message to owner's email
+            sendMessageToOwner(message);
+            
+            // Show confirmation message
+            setTimeout(() => {
+                addMessage("Thank you for your message! I'll get back to you within 1-2 business days via email. 😊", 'owner');
+            }, 1000);
+        }
+        
+        function sendMessageToOwner(customerMessage) {
+            // Get customer info if available
+            const customerName = localStorage.getItem('customerName') || 'Anonymous Customer';
+            const customerEmail = localStorage.getItem('customerEmail') || 'No email provided';
+            
+            // Create email content
+            const subject = `New Chat Message from ${customerName}`;
+            const body = `
+New message from Blooming Beads website chat:
+
+Customer: ${customerName}
+Email: ${customerEmail}
+Message: ${customerMessage}
+
+Time: ${new Date().toLocaleString()}
+
+Please respond to this customer at: ${customerEmail}
+            `;
+            
+            // Create mailto link
+            const mailtoLink = `mailto:your-email@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            // Open email client
+            window.open(mailtoLink);
+            
+            // Also store the message for admin panel
+            const chatMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
+            chatMessages.push({
+                type: 'customer',
+                message: customerMessage,
+                timestamp: new Date().toISOString(),
+                customerName: customerName,
+                customerEmail: customerEmail
+            });
+            localStorage.setItem('chatMessages', JSON.stringify(chatMessages));
+        }
+        
+        function addMessage(text, sender) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            
+            messageDiv.innerHTML = `
+                <div class="message-content">
+                    <p>${text}</p>
+                    <div class="message-time">${timeString}</div>
+                </div>
+            `;
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Save chat messages
+            saveChatMessages();
+        }
+        
+        function handleChatKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+        
+        function saveChatMessages() {
+            const chatMessages = document.getElementById('chatMessages');
+            const messages = Array.from(chatMessages.children).map(msg => ({
+                type: msg.classList.contains('owner-message') ? 'owner' : 'customer',
+                content: msg.querySelector('p').textContent,
+                time: msg.querySelector('.message-time').textContent
+            }));
+            localStorage.setItem('chatMessages', JSON.stringify(messages));
+        }
+        
+        function loadChatMessages() {
+            const savedMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
+            const chatMessages = document.getElementById('chatMessages');
+            
+            // Clear existing messages except welcome messages
+            const welcomeMessages = chatMessages.querySelectorAll('.owner-message');
+            welcomeMessages.forEach(msg => msg.remove());
+            
+            // Load saved messages
+            savedMessages.forEach(msg => {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${msg.type}-message`;
+                messageDiv.innerHTML = `
+                    <div class="message-content">
+                        <p>${msg.content}</p>
+                        <div class="message-time">${msg.time}</div>
+                    </div>
+                `;
+                chatMessages.appendChild(messageDiv);
+            });
+            
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        // Initialize chat
+        document.addEventListener('DOMContentLoaded', function() {
+            loadChatMessages();
+        });
+    </script>
+</body>
+</html>

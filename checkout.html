@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Blooming Beads</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .checkout-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
+        .checkout-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .checkout-content {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 30px;
+        }
+        
+        .checkout-form {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .order-summary {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+        
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .order-item:last-child {
+            border-bottom: none;
+        }
+        
+        .item-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .item-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+        
+        .item-details h4 {
+            margin: 0;
+            font-size: 1rem;
+            color: #333;
+        }
+        
+        .item-details p {
+            margin: 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .item-price {
+            font-weight: 600;
+            color: #ff6b9d;
+        }
+        
+        .order-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-top: 2px solid #ff6b9d;
+            margin-top: 20px;
+        }
+        
+        .total-label {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .total-amount {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ff6b9d;
+        }
+        
+        .back-to-cart {
+            display: inline-block;
+            background: #6c757d;
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-to-cart:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .payment-methods {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .payment-methods h3 {
+            margin: 0 0 15px 0;
+            color: #333;
+            font-size: 1.1rem;
+        }
+        
+        .payment-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .payment-icons i {
+            font-size: 2rem;
+            color: #666;
+        }
+        
+        .payment-icons .fa-cc-visa {
+            color: #1a1f71;
+        }
+        
+        .payment-icons .fa-cc-mastercard {
+            color: #eb001b;
+        }
+        
+        .payment-icons .fa-cc-amex {
+            color: #006fcf;
+        }
+        
+        .payment-icons .fa-cc-discover {
+            color: #ff6000;
+        }
+        
+        .test-cards {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            text-align: left;
+        }
+        
+        .test-cards h4 {
+            margin: 0 0 10px 0;
+            color: #856404;
+            font-size: 1rem;
+        }
+        
+        .test-cards p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+            color: #856404;
+        }
+        
+        .test-cards strong {
+            color: #533f03;
+        }
+        
+        .security-notice {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            padding: 15px;
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            color: #155724;
+        }
+        
+        .security-notice i {
+            color: #28a745;
+        }
+        
+        .error-message {
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 5px;
+            display: block;
+        }
+        
+        .form-group input.error {
+            border-color: #dc3545;
+        }
+        
+        .form-group input.valid {
+            border-color: #28a745;
+        }
+        
+        @media (max-width: 768px) {
+            .checkout-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="checkout-container">
+        <a href="index.html" class="back-to-cart">
+            <i class="fas fa-arrow-left"></i> Back to Shopping
+        </a>
+        
+        <div class="checkout-header">
+            <h1><i class="fas fa-credit-card"></i> Checkout</h1>
+            <p>Complete your order to get your beautiful bracelets</p>
+        </div>
+        
+        <div class="checkout-content">
+            <div class="checkout-form">
+                <h2>Customer Information</h2>
+                <form id="checkoutForm">
+                    <h3>Contact Information</h3>
+                    <div class="form-group">
+                        <label for="customerName">Full Name *</label>
+                        <input type="text" id="customerName" name="customerName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerEmail">Email Address (for order updates) *</label>
+                        <input type="email" id="customerEmail" name="customerEmail" required placeholder="We'll use this to send you order updates">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerPhone">Phone Number *</label>
+                        <input type="tel" id="customerPhone" name="customerPhone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerAddress">Full Address *</label>
+                        <textarea id="customerAddress" name="customerAddress" rows="3" required placeholder="Street address, city, state, zip code"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="specialInstructions">Special Instructions (Optional)</label>
+                        <textarea id="specialInstructions" name="specialInstructions" rows="3" placeholder="Any special requests or notes for your order"></textarea>
+                    </div>
+                    
+                    
+                    <button type="button" id="nextButton" class="submit-button">
+                        <i class="fas fa-arrow-right"></i> Next
+                    </button>
+                </form>
+                
+                <!-- Contact Methods Section (Hidden Initially) -->
+                <div id="contactMethods" style="display: none; margin-top: 30px; padding: 30px; background: #f8f9fa; border-radius: 15px;">
+                    <h2 style="text-align: center; margin-bottom: 20px; color: #333;">How would you like to contact us?</h2>
+                    <p style="text-align: center; margin-bottom: 30px; color: #666;">Choose your preferred method to complete your order:</p>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;" class="contact-grid">
+                        <!-- Instagram Option -->
+                        <div style="background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                            <div style="font-size: 2rem; margin-bottom: 10px;">📸</div>
+                            <h3 style="color: #E4405F; margin-bottom: 15px;">Instagram DM</h3>
+                            <p style="color: #666; margin-bottom: 15px;">DM us on Instagram with your order details</p>
+                            <a href="https://www.instagram.com/bloomingbeadsxoxo" target="_blank" style="display: inline-block; background: #E4405F; color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: 600;">Open Instagram</a>
+                        </div>
+                        
+                        <!-- TikTok Option -->
+                        <div style="background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                            <div style="font-size: 2rem; margin-bottom: 10px;">🎵</div>
+                            <h3 style="color: #000000; margin-bottom: 15px;">TikTok DM</h3>
+                            <p style="color: #666; margin-bottom: 15px;">DM us on TikTok with your order details</p>
+                            <a href="https://tiktok.com/@blooming.beadsss" target="_blank" style="display: inline-block; background: #000000; color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: 600;">Open TikTok</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Email Option -->
+                    <div style="background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 20px;">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">📧</div>
+                        <h3 style="color: #333; margin-bottom: 15px;">Email</h3>
+                        <p style="color: #666; margin-bottom: 15px;">Send us an email with your order details</p>
+                        <a href="#" id="emailLink" style="display: inline-block; background: #6c757d; color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: 600;">Open Email</a>
+                    </div>
+                    
+                    <!-- Order Details for Copying -->
+                    <div style="background: white; padding: 20px; border-radius: 10px; margin-top: 20px;">
+                        <h4 style="color: #333; margin-bottom: 15px;">Copy this information to include in your message:</h4>
+                        <div id="orderDetailsForCopy" style="background: #f8f9fa; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 0.9rem; text-align: left; white-space: pre-line; border: 1px solid #dee2e6;"></div>
+                        <button onclick="copyOrderDetails()" style="margin-top: 10px; background: #28a745; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer;">Copy to Clipboard</button>
+                    </div>
+                </div>
+                
+                <!-- Contact Information -->
+                <div class="contact-info" style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px; text-align: center;">
+                    <h3 style="margin-bottom: 15px; color: #333;">Need Help? Contact Us!</h3>
+                    <p style="margin: 5px 0; color: #666;">📧 Email: therealbloomingbeads@gmail.com</p>
+                    <p style="margin: 5px 0; color: #666;">📱 Phone: (702) 555-0123</p>
+                    <p style="margin: 5px 0; color: #666;">⏰ Hours: Mon-Fri 9AM-6PM PST</p>
+                    <div style="margin: 15px 0; padding: 10px; background: white; border-radius: 8px;">
+                        <p style="margin: 5px 0; color: #666; font-weight: 600;">📸 Follow us on Instagram:</p>
+                        <a href="https://www.instagram.com/bloomingbeadsxoxo" target="_blank" style="color: #E4405F; text-decoration: none; font-weight: 600;">@bloomingbeadsxoxo</a>
+                        <p style="margin: 10px 0 5px 0; color: #666; font-weight: 600;">🎵 Follow us on TikTok:</p>
+                        <a href="https://tiktok.com/@blooming.beadsss" target="_blank" style="color: #000000; text-decoration: none; font-weight: 600;">@blooming.beadsss</a>
+                        <p style="margin-top: 10px; font-size: 0.9rem; color: #888;">If your email client doesn't open, DM us on Instagram or TikTok with your name, email, address, and item names.</p>
+                    </div>
+                    <p style="margin-top: 10px; font-size: 0.9rem; color: #888;">If your email client doesn't open, you can contact us directly using any of the methods above.</p>
+                </div>
+            </div>
+            
+            <div class="order-summary">
+                <h2>Order Summary</h2>
+                <div id="orderItems">
+                    <!-- Order items will be populated here -->
+                </div>
+                <div class="order-total">
+                    <span class="total-label">Total:</span>
+                    <span class="total-amount" id="orderTotal">$0.00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load cart data from localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        // Check for custom order and add to cart
+        const customOrder = localStorage.getItem('customOrder');
+        if (customOrder) {
+            const customOrderData = JSON.parse(customOrder);
+            cart.push(customOrderData);
+            localStorage.removeItem('customOrder'); // Remove after adding to cart
+            localStorage.setItem('cart', JSON.stringify(cart)); // Update cart in localStorage
+        }
+        const taxRate = 0.08; // 8% tax rate
+        let shippingCost = 0;
+        let calculatedShipping = false;
+        
+        // Business location (89044 - Henderson, NV)
+        const businessCoords = {
+            lat: 36.0395,
+            lng: -114.9817
+        };
+        
+        // Shipping options with different costs
+        const shippingOptions = {
+            local: { maxDistance: 25, cost: 0, name: 'Local Delivery (Free)', carrier: 'Local Delivery' },
+            regional: { maxDistance: 100, cost: 3.99, name: 'Regional Shipping', carrier: 'USPS Ground' },
+            state: { maxDistance: 300, cost: 5.99, name: 'State Shipping', carrier: 'USPS Priority' },
+            national: { maxDistance: 1000, cost: 7.99, name: 'National Shipping', carrier: 'USPS Priority' },
+            express: { maxDistance: Infinity, cost: 12.99, name: 'Express Shipping', carrier: 'FedEx Express' }
+        };
+        
+        // Calculate distance between two coordinates using Haversine formula
+        function calculateDistance(lat1, lng1, lat2, lng2) {
+            const R = 3959; // Earth's radius in miles
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLng = (lng2 - lng1) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                      Math.sin(dLng/2) * Math.sin(dLng/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        }
+        
+        // Get coordinates from address using a simple geocoding approach
+        async function getCoordinatesFromAddress(address) {
+            // For demo purposes, we'll use a simple mapping of common cities
+            // In a real application, you'd use a geocoding service like Google Maps API
+            const cityCoordinates = {
+                'las vegas': { lat: 36.1699, lng: -115.1398 },
+                'henderson': { lat: 36.0395, lng: -114.9817 },
+                'north las vegas': { lat: 36.1989, lng: -115.1175 },
+                'reno': { lat: 39.5296, lng: -119.8138 },
+                'carson city': { lat: 39.1638, lng: -119.7674 },
+                'phoenix': { lat: 33.4484, lng: -112.0740 },
+                'los angeles': { lat: 34.0522, lng: -118.2437 },
+                'san diego': { lat: 32.7157, lng: -117.1611 },
+                'san francisco': { lat: 37.7749, lng: -122.4194 },
+                'seattle': { lat: 47.6062, lng: -122.3321 },
+                'denver': { lat: 39.7392, lng: -104.9903 },
+                'salt lake city': { lat: 40.7608, lng: -111.8910 },
+                'portland': { lat: 45.5152, lng: -122.6784 },
+                'chicago': { lat: 41.8781, lng: -87.6298 },
+                'new york': { lat: 40.7128, lng: -74.0060 },
+                'miami': { lat: 25.7617, lng: -80.1918 },
+                'atlanta': { lat: 33.7490, lng: -84.3880 },
+                'dallas': { lat: 32.7767, lng: -96.7970 },
+                'houston': { lat: 29.7604, lng: -95.3698 },
+                'austin': { lat: 30.2672, lng: -97.7431 }
+            };
+            
+            // Extract city name from address (simple approach)
+            const addressLower = address.toLowerCase();
+            for (const [city, coords] of Object.entries(cityCoordinates)) {
+                if (addressLower.includes(city)) {
+                    return coords;
+                }
+            }
+            
+            // Default to business location if city not found
+            return businessCoords;
+        }
+        
+        // Calculate cheapest shipping cost based on address
+        async function calculateCheapestShipping(address) {
+            try {
+                const customerCoords = await getCoordinatesFromAddress(address);
+                const distance = calculateDistance(
+                    businessCoords.lat, businessCoords.lng,
+                    customerCoords.lat, customerCoords.lng
+                );
+                
+                // Find the cheapest shipping option that covers the distance
+                let cheapestOption = null;
+                let cheapestCost = Infinity;
+                
+                for (const [optionName, option] of Object.entries(shippingOptions)) {
+                    if (distance <= option.maxDistance && option.cost < cheapestCost) {
+                        cheapestOption = option;
+                        cheapestCost = option.cost;
+                    }
+                }
+                
+                // If no option covers the distance, use express
+                if (!cheapestOption) {
+                    cheapestOption = shippingOptions.express;
+                }
+                
+                return {
+                    cost: cheapestOption.cost,
+                    name: cheapestOption.name,
+                    carrier: cheapestOption.carrier,
+                    distance: Math.round(distance)
+                };
+            } catch (error) {
+                console.error('Error calculating shipping:', error);
+                // Default to national shipping if calculation fails
+                return {
+                    cost: shippingOptions.national.cost,
+                    name: shippingOptions.national.name,
+                    carrier: shippingOptions.national.carrier,
+                    distance: 'Unknown'
+                };
+            }
+        }
+        
+        // Display order summary with tax and shipping
+        function displayOrderSummary() {
+            const orderItemsContainer = document.getElementById('orderItems');
+            const orderTotalElement = document.getElementById('orderTotal');
+            
+            if (cart.length === 0) {
+                orderItemsContainer.innerHTML = `
+                    <div style="text-align: center; padding: 20px; color: #666;">
+                        <i class="fas fa-shopping-cart" style="font-size: 2rem; margin-bottom: 10px; display: block;"></i>
+                        <p>No items in cart</p>
+                        <p style="font-size: 0.9rem;">Add items to your cart to see them here</p>
+                    </div>
+                `;
+                orderTotalElement.textContent = '$0.00';
+                return;
+            }
+            
+            let subtotal = 0;
+            orderItemsContainer.innerHTML = cart.map(item => {
+                if (item.type === 'custom') {
+                    return `
+                        <div class="order-item">
+                            <div class="item-info">
+                                <img src="${item.image}" alt="${item.name}" class="item-image">
+                                <div class="item-details">
+                                    <h4>${item.name}</h4>
+                                    <p><strong>Custom Order Details:</strong></p>
+                                    <p>• Type: ${item.details.braceletType}</p>
+                                    <p>• Colors: ${item.details.colorCombo}</p>
+                                    <p>• Size: ${item.details.size}</p>
+                                    ${item.details.specialRequests ? `<p>• Special Requests: ${item.details.specialRequests}</p>` : ''}
+                                    <p style="color: #E4405F; font-weight: bold;">Price: TBD (Custom pricing)</p>
+                                </div>
+                            </div>
+                            <div class="item-price">TBD</div>
+                        </div>
+                    `;
+                } else {
+                    subtotal += item.price * item.quantity;
+                    return `
+                        <div class="order-item">
+                            <div class="item-info">
+                                <img src="${item.image}" alt="${item.name}" class="item-image">
+                                <div class="item-details">
+                                    <h4>${item.name}</h4>
+                                    <p>Quantity: ${item.quantity} × $${item.price.toFixed(2)} each</p>
+                                </div>
+                            </div>
+                            <div class="item-price">$${(item.price * item.quantity).toFixed(2)}</div>
+                        </div>
+                    `;
+                }
+            }).join('');
+            
+            // Add subtotal line
+            orderItemsContainer.innerHTML += `
+                <div class="order-item" style="border-top: 1px solid #eee; padding-top: 10px; margin-top: 10px;">
+                    <div class="item-info">
+                        <div class="item-details">
+                            <h4 style="font-weight: bold;">Subtotal</h4>
+                        </div>
+                    </div>
+                    <div class="item-price" style="font-weight: bold;">$${subtotal.toFixed(2)}</div>
+                </div>
+            `;
+            
+            // Add shipping line - will be calculated when owner responds
+            orderItemsContainer.innerHTML += `
+                <div class="order-item">
+                    <div class="item-info">
+                        <div class="item-details">
+                            <h4>Shipping</h4>
+                            <p style="font-size: 0.8rem; color: #666;">Calculated when we respond</p>
+                        </div>
+                    </div>
+                    <div class="item-price">TBD</div>
+                </div>
+            `;
+            
+            // Add tax line
+            const taxAmount = subtotal * taxRate;
+            orderItemsContainer.innerHTML += `
+                <div class="order-item">
+                    <div class="item-info">
+                        <div class="item-details">
+                            <h4>Tax (8%)</h4>
+                        </div>
+                    </div>
+                    <div class="item-price">$${taxAmount.toFixed(2)}</div>
+                </div>
+            `;
+            
+            // Check if there are custom orders
+            const hasCustomOrders = cart.some(item => item.type === 'custom');
+            
+            // Total without shipping (shipping calculated when owner responds)
+            const total = subtotal + taxAmount;
+            
+            if (hasCustomOrders) {
+                orderTotalElement.textContent = `$${total.toFixed(2)} + custom pricing + shipping`;
+            } else {
+                orderTotalElement.textContent = `$${total.toFixed(2)} + shipping`;
+            }
+        }
+        
+        
+        // Handle Next button click
+        document.getElementById('nextButton').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            if (cart.length === 0) {
+                return;
+            }
+            
+            // Get form data
+            const formData = new FormData(document.getElementById('checkoutForm'));
+            
+            // Calculate totals (shipping calculated when owner responds)
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const taxAmount = subtotal * taxRate;
+            const finalTotal = subtotal + taxAmount; // No shipping included
+            
+            const orderData = {
+                id: Date.now(),
+                date: new Date().toISOString(),
+                customerName: formData.get('customerName'),
+                customerEmail: formData.get('customerEmail'),
+                customerPhone: formData.get('customerPhone'),
+                customerAddress: formData.get('customerAddress'),
+                specialInstructions: formData.get('specialInstructions'),
+                items: [...cart],
+                subtotal: subtotal,
+                shippingCost: 0, // Will be calculated when owner responds
+                taxAmount: taxAmount,
+                taxRate: taxRate,
+                total: finalTotal,
+                status: 'pending'
+            };
+            
+            // Generate order ID
+            const orderId = 'BB' + String(orderData.id).slice(-6);
+            
+            // Create order details for display
+            let orderDetails = `Order Request #${orderId}
+
+Customer Information:
+- Name: ${orderData.customerName}
+- Email: ${orderData.customerEmail}
+- Phone: ${orderData.customerPhone}
+- Address: ${orderData.customerAddress}
+${orderData.specialInstructions ? `- Special Instructions: ${orderData.specialInstructions}` : ''}
+
+Order Items:
+${orderData.items.map(item => {
+    if (item.type === 'custom') {
+        return `- ${item.name} (Custom Order)
+  * Bracelet Type: ${item.details.braceletType}
+  * Color Combination: ${item.details.colorCombo}
+  * Size: ${item.details.size}
+  * Special Requests: ${item.details.specialRequests || 'None'}
+  * Price: TBD (Custom pricing)`;
+    } else {
+        return `- ${item.name} (Qty: ${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}`;
+    }
+}).join('\n')}
+
+Order Summary:
+- Subtotal: $${orderData.subtotal.toFixed(2)}
+- Tax: $${orderData.taxAmount.toFixed(2)}
+- Shipping: TBD
+- Total: $${orderData.total.toFixed(2)} + shipping
+
+Please include this information when contacting us.`;
+            
+            // Hide the form and show contact methods
+            document.getElementById('checkoutForm').style.display = 'none';
+            document.getElementById('contactMethods').style.display = 'block';
+            
+            // Update the order details for copying
+            document.getElementById('orderDetailsForCopy').textContent = orderDetails;
+            
+            // Set up email link with order details
+            const emailLink = document.getElementById('emailLink');
+            const emailSubject = `Order Request #${orderId} - ${orderData.customerName}`;
+            const emailBody = encodeURIComponent(orderDetails);
+            emailLink.href = `mailto:therealbloomingbeads@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${emailBody}`;
+            
+            // Save order to localStorage
+            let orders = JSON.parse(localStorage.getItem('orders')) || [];
+            orders.push(orderData);
+            localStorage.setItem('orders', JSON.stringify(orders));
+        });
+        
+        // Function to copy order details to clipboard
+        function copyOrderDetails() {
+            const orderDetails = document.getElementById('orderDetailsForCopy').textContent;
+            navigator.clipboard.writeText(orderDetails).then(() => {
+                // Success - no notification
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                // Failure - no notification
+            });
+        }
+        
+        // Function to send order email to owner
+        function sendOrderEmail(orderData) {
+            console.log('sendOrderEmail called with:', orderData);
+            
+            // Your email address - CHANGE THIS TO YOUR ACTUAL EMAIL
+            const ownerEmail = 'therealbloomingbeads@gmail.com';
+            
+            // Create email subject
+            const subject = `New Order Request #${String(orderData.id).slice(-6)} - ${orderData.customerName}`;
+            console.log('Email subject:', subject);
+            
+            // Create email body with order details
+            const itemsList = orderData.items.map(item => 
+                `- ${item.name} (Qty: ${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}`
+            ).join('\n');
+            
+            const emailBody = `
+NEW ORDER REQUEST - Blooming Beads Website
+
+Order Details:
+================
+Order ID: #${String(orderData.id).slice(-6)}
+Date: ${new Date(orderData.date).toLocaleString()}
+
+Customer Information:
+====================
+Name: ${orderData.customerName}
+Email: ${orderData.customerEmail}
+Phone: ${orderData.customerPhone}
+Address: ${orderData.customerAddress}
+${orderData.specialInstructions ? `Special Instructions: ${orderData.specialInstructions}` : ''}
+
+Order Items:
+============
+${itemsList}
+
+Pricing:
+========
+Subtotal: $${orderData.subtotal.toFixed(2)}
+Shipping: $${orderData.shippingCost.toFixed(2)}
+Tax (${(orderData.taxRate * 100).toFixed(0)}%): $${orderData.taxAmount.toFixed(2)}
+TOTAL: $${orderData.total.toFixed(2)}
+
+Next Steps:
+===========
+1. Contact customer at: ${orderData.customerEmail}
+2. Confirm order details
+3. Arrange payment method
+4. Process and ship order
+
+---
+This email was automatically generated from the Blooming Beads website.
+            `;
+            
+            // Create mailto link
+            const mailtoLink = `mailto:${ownerEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+            console.log('Mailto link created:', mailtoLink);
+            
+            // Try to open email client
+            console.log('Opening email client...');
+            const emailOpened = window.open(mailtoLink);
+            
+            // Check if email client opened successfully
+            setTimeout(() => {
+                if (!emailOpened || emailOpened.closed) {
+                    // Email client didn't open, show alternative contact methods
+                    showAlternativeContactMethods(orderData);
+                }
+            }, 1000);
+            
+            // Also try to send via EmailJS if available (optional)
+            try {
+                sendEmailViaService(orderData);
+            } catch (error) {
+                console.log('EmailJS not configured, using mailto fallback');
+            }
+        }
+        
+        // Function to show alternative contact methods if email client doesn't work
+        function showAlternativeContactMethods(orderData) {
+            const orderId = String(orderData.id).slice(-6);
+            const orderDetails = `
+Order #${orderId}
+Customer: ${orderData.customerName}
+Email: ${orderData.customerEmail}
+Phone: ${orderData.customerPhone}
+Total: $${orderData.total.toFixed(2)}
+
+Items:
+${orderData.items.map(item => `- ${item.name} (Qty: ${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}`).join('\n')}
+            `;
+            
+            const alternativeMethods = `
+Your email client didn't open. Here are alternative ways to contact us:
+
+📸 INSTAGRAM (RECOMMENDED):
+DM us on Instagram: @bloomingbeadsxoxo
+Include: "Order Request #${orderId}"
+Please include:
+- Your name: ${orderData.customerName}
+- Your email: ${orderData.customerEmail}
+- Your address: ${orderData.customerAddress}
+- Items you want: ${orderData.items.map(item => `${item.name} (Qty: ${item.quantity})`).join(', ')}
+- Total: $${orderData.total.toFixed(2)}
+
+🎵 TIKTOK:
+DM us on TikTok: @blooming.beadsss
+Please include:
+- Your name: ${orderData.customerName}
+- Your email: ${orderData.customerEmail}
+- Your address: ${orderData.customerAddress}
+- Items you want: ${orderData.items.map(item => `${item.name} (Qty: ${item.quantity})`).join(', ')}
+- Total: $${orderData.total.toFixed(2)}
+
+📧 EMAIL US DIRECTLY:
+Send an email to: therealbloomingbeads@gmail.com
+Subject: Order Request #${orderId}
+
+📱 CALL US:
+Phone: (702) 555-0123
+Hours: Mon-Fri 9AM-6PM PST
+
+💬 TEXT US:
+Text: (702) 555-0123
+Include: "Order Request #${orderId}"
+
+Your order details have been saved. Please contact us using one of the methods above to complete your order.
+            `;
+            
+            // No notification
+            
+            // Also save the order details to localStorage so they can reference it
+            localStorage.setItem('pendingOrder', JSON.stringify(orderData));
+        }
+        
+        // Optional: Advanced email sending via EmailJS service
+        function sendEmailViaService(orderData) {
+            // This is an optional advanced method using EmailJS
+            // To use this, you would need to:
+            // 1. Sign up at https://www.emailjs.com/
+            // 2. Get your service ID, template ID, and public key
+            // 3. Uncomment and configure the code below
+            
+            /*
+            const serviceId = 'YOUR_SERVICE_ID';
+            const templateId = 'YOUR_TEMPLATE_ID';
+            const publicKey = 'YOUR_PUBLIC_KEY';
+            
+            const templateParams = {
+                to_email: 'therealbloomingbeads@gmail.com',
+                from_name: orderData.customerName,
+                from_email: orderData.customerEmail,
+                order_id: String(orderData.id).slice(-6),
+                customer_name: orderData.customerName,
+                customer_email: orderData.customerEmail,
+                customer_phone: orderData.customerPhone,
+                customer_address: orderData.customerAddress,
+                special_instructions: orderData.specialInstructions || 'None',
+                items: orderData.items.map(item => `${item.name} (Qty: ${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}`).join('\n'),
+                subtotal: orderData.subtotal.toFixed(2),
+                shipping: orderData.shippingCost.toFixed(2),
+                tax: orderData.taxAmount.toFixed(2),
+                total: orderData.total.toFixed(2)
+            };
+            
+            emailjs.send(serviceId, templateId, templateParams, publicKey)
+                .then(function(response) {
+                    console.log('Email sent successfully!', response.status, response.text);
+                }, function(error) {
+                    console.log('Email failed to send:', error);
+                });
+            */
+        }
+        
+        // No automatic shipping calculation - shipping will be calculated when owner responds
+        
+        // Initialize page
+        displayOrderSummary();
+    </script>
+</body>
+</html>
+

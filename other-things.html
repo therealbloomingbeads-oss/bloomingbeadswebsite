@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Other Things - Blooming Beads</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <div class="logo-img"></div>
+                    <span class="logo-text">Blooming Beads</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="index.html#categories" class="nav-link">Products</a></li>
+                    <li><a href="index.html#about" class="nav-link">About</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Secret Admin Trigger Button (invisible to customers) -->
+    <button class="admin-trigger" onclick="toggleAdminMode()" title="Admin Access"></button>
+
+    <!-- Shopping Cart Button -->
+    <div class="cart-container">
+        <button class="cart-button" onclick="toggleCart()" title="Shopping Cart">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count" id="cartCount">0</span>
+        </button>
+        
+        <!-- Cart Dropdown -->
+        <div class="cart-dropdown" id="cartDropdown">
+            <div class="cart-header">
+                <h3>Shopping Cart</h3>
+                <button class="close-cart" onclick="toggleCart()">×</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <div class="empty-cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <p>Your cart is empty</p>
+                </div>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <strong>Total: $<span id="cartTotal">0.00</span></strong>
+                </div>
+                <button class="checkout-btn" onclick="proceedToCheckout()" disabled>
+                    Proceed to Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Bell -->
+    <div class="notification-container">
+        <button class="notification-bell" onclick="toggleNotifications()" title="Notifications">
+            <i class="fas fa-bell"></i>
+            <span class="notification-count" id="notificationCount">0</span>
+        </button>
+        
+        <!-- Notifications Dropdown -->
+        <div class="notifications-dropdown" id="notificationsDropdown">
+            <div class="notifications-header">
+                <h3>Notifications</h3>
+                <button class="close-notifications" onclick="toggleNotifications()">×</button>
+            </div>
+            <div class="notifications-list" id="notificationsList">
+                <div class="no-notifications">
+                    <i class="fas fa-bell-slash"></i>
+                    <p>No notifications yet</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <main style="padding-top: 100px;">
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Other Things</h1>
+                    <p class="hero-subtitle">Discover our additional products and services beyond bracelets</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="categories">
+            <div class="container">
+                <h2 class="section-title">What We Offer</h2>
+                <div class="categories-grid">
+                    <div class="category-card">
+                        <div class="category-image">
+                            <img src="images/logo.jpeg" alt="Custom Jewelry" class="category-img">
+                        </div>
+                        <div class="category-content">
+                            <h3 class="category-title">Custom Jewelry</h3>
+                            <p class="category-description">Personalized jewelry pieces made just for you</p>
+                            <div class="subcategories">
+                                <a href="#" class="subcategory-link">Necklaces</a>
+                                <a href="#" class="subcategory-link">Earrings</a>
+                                <a href="#" class="subcategory-link">Rings</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-image">
+                            <img src="images/logo.jpeg" alt="Gift Sets" class="category-img">
+                        </div>
+                        <div class="category-content">
+                            <h3 class="category-title">Gift Sets</h3>
+                            <p class="category-description">Beautifully curated gift collections</p>
+                            <div class="subcategories">
+                                <a href="#" class="subcategory-link">Birthday Sets</a>
+                                <a href="#" class="subcategory-link">Holiday Sets</a>
+                                <a href="#" class="subcategory-link">Special Occasions</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-image">
+                            <img src="images/logo.jpeg" alt="Accessories" class="category-img">
+                        </div>
+                        <div class="category-content">
+                            <h3 class="category-title">Accessories</h3>
+                            <p class="category-description">Complementary accessories for your jewelry</p>
+                            <div class="subcategories">
+                                <a href="#" class="subcategory-link">Jewelry Boxes</a>
+                                <a href="#" class="subcategory-link">Cleaning Kits</a>
+                                <a href="#" class="subcategory-link">Storage Solutions</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about">
+            <div class="container">
+                <h2 class="section-title">More About Our Services</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>At Blooming Beads, we don't just create beautiful bracelets - we offer a full range of jewelry and accessories to complete your style.</p>
+                        <p>From custom necklaces to gift sets, we're here to help you find the perfect pieces for any occasion.</p>
+                        <p>Contact us to learn more about our additional products and services!</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="images/logo.jpeg" alt="Blooming Beads Services" class="about-img">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Blooming Beads</h3>
+                    <p>Creating beautiful, handcrafted jewelry that brings joy to your everyday life.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="clay-beads.html">Clay Beads</a></li>
+                        <li><a href="glass-beads.html">Glass Beads</a></li>
+                        <li><a href="pearl-bracelets.html">Pearl Bracelets</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> info@bloomingbeads.com</li>
+                        <li><i class="fas fa-phone"></i> (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Your City, State</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Blooming Beads. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Shopping Cart Functions
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        // Check if admin mode should be active on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const adminMode = localStorage.getItem('adminMode');
+            if (adminMode === 'true') {
+                document.body.classList.add('admin-mode-active');
+                document.getElementById('adminNav').style.display = 'block';
+            }
+            
+            // Initialize cart and notifications
+            updateCartDisplay();
+            updateNotificationDisplay();
+        });
+        
+        function addToCart(name, price, image) {
+            const existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    name: name,
+                    price: price,
+                    image: image,
+                    quantity: 1
+                });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartDisplay();
+            
+            // Show success message
+            showCartMessage('Added to cart!');
+        }
+        
+        function updateCartDisplay() {
+            const cartCount = document.getElementById('cartCount');
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            if (!cartCount || !cartItems || !cartTotal) {
+                console.log('Cart elements not found');
+                return;
+            }
+            const checkoutBtn = document.querySelector('.checkout-btn');
+            
+            cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <p>Your cart is empty</p>
+                    </div>
+                `;
+                cartTotal.textContent = '0.00';
+                checkoutBtn.disabled = true;
+            } else {
+                cartItems.innerHTML = cart.map((item, index) => `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                        <div class="cart-item-details">
+                            <h4>${item.name}</h4>
+                            <p>$${item.price.toFixed(2)} each</p>
+                        </div>
+                        <div class="cart-item-controls">
+                            <button class="quantity-btn" onclick="updateQuantity(${index}, -1)">-</button>
+                            <span>${item.quantity}</span>
+                            <button class="quantity-btn" onclick="updateQuantity(${index}, 1)">+</button>
+                            <button class="remove-item" onclick="removeFromCart(${index})">×</button>
+                        </div>
+                    </div>
+                `).join('');
+                
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                cartTotal.textContent = total.toFixed(2);
+                checkoutBtn.disabled = false;
+            }
+        }
+        
+        function updateQuantity(index, change) {
+            cart[index].quantity += change;
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartDisplay();
+        }
+        
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartDisplay();
+        }
+        
+        function toggleCart() {
+            const cartDropdown = document.getElementById('cartDropdown');
+            const notificationsDropdown = document.getElementById('notificationsDropdown');
+            
+            if (notificationsDropdown) {
+                notificationsDropdown.classList.remove('show');
+            }
+            if (cartDropdown) {
+                cartDropdown.classList.toggle('show');
+            }
+        }
+        
+        function proceedToCheckout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            window.location.href = 'checkout.html';
+        }
+        
+        function showCartMessage(message) {
+            // Create temporary message
+            const messageDiv = document.createElement('div');
+            messageDiv.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: #28a745;
+                color: white;
+                padding: 15px 25px;
+                border-radius: 25px;
+                z-index: 10000;
+                font-weight: 600;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            `;
+            messageDiv.textContent = message;
+            document.body.appendChild(messageDiv);
+            
+            setTimeout(() => {
+                document.body.removeChild(messageDiv);
+            }, 2000);
+        }
+        
+        // Notification Functions
+        function updateNotificationDisplay() {
+            const notifications = JSON.parse(localStorage.getItem('notifications')) || [];
+            const notificationCount = document.getElementById('notificationCount');
+            const notificationsList = document.getElementById('notificationsList');
+            
+            if (notificationCount) {
+                notificationCount.textContent = notifications.length;
+            }
+            
+            if (notificationsList) {
+                if (notifications.length === 0) {
+                    notificationsList.innerHTML = `
+                        <div class="no-notifications">
+                            <i class="fas fa-bell-slash"></i>
+                            <p>No notifications yet</p>
+                        </div>
+                    `;
+                } else {
+                    notificationsList.innerHTML = notifications.map(notification => `
+                        <div class="notification-item ${notification.read ? '' : 'unread'}" onclick="markAsRead('${notification.id}')">
+                            <div class="notification-title">${notification.title}</div>
+                            <div class="notification-message">${notification.message}</div>
+                            <div class="notification-date">${new Date(notification.date).toLocaleDateString()}</div>
+                        </div>
+                    `).join('');
+                }
+            }
+        }
+        
+        function toggleNotifications() {
+            const notificationsDropdown = document.getElementById('notificationsDropdown');
+            const cartDropdown = document.getElementById('cartDropdown');
+            
+            if (cartDropdown) {
+                cartDropdown.classList.remove('show');
+            }
+            if (notificationsDropdown) {
+                notificationsDropdown.classList.toggle('show');
+            }
+        }
+        
+        function markAsRead(notificationId) {
+            const notifications = JSON.parse(localStorage.getItem('notifications')) || [];
+            const notification = notifications.find(n => n.id === notificationId);
+            if (notification) {
+                notification.read = true;
+                localStorage.setItem('notifications', JSON.stringify(notifications));
+                updateNotificationDisplay();
+            }
+        }
+        
+        function addNotification(title, message) {
+            const notifications = JSON.parse(localStorage.getItem('notifications')) || [];
+            const newNotification = {
+                id: Date.now().toString(),
+                title: title,
+                message: message,
+                date: new Date().toISOString(),
+                read: false
+            };
+            notifications.unshift(newNotification);
+            localStorage.setItem('notifications', JSON.stringify(notifications));
+            updateNotificationDisplay();
+        }
+        
+        // Chat Functions
+        function toggleChat() {
+            const chatContainer = document.getElementById('chatContainer');
+            if (chatContainer) {
+                chatContainer.classList.toggle('show');
+            }
+            
+            // Hide chat badge when chat is open
+            const chatBadge = document.getElementById('chatBadge');
+            if (chatContainer.classList.contains('show')) {
+                document.getElementById('chatBadge').style.display = 'none';
+            }
+        }
+        
+        function sendMessage() {
+            const chatInput = document.getElementById('chatInput');
+            const message = chatInput.value.trim();
+            
+            if (message === '') return;
+            
+            // Add customer message
+            addMessage(message, 'customer');
+            chatInput.value = '';
+            
+            // Send message to owner's email
+            sendMessageToOwner(message);
+            
+            // Show confirmation message
+            setTimeout(() => {
+                addMessage("Thank you for your message! I'll get back to you within 1-2 business days via email. 😊", 'owner');
+            }, 1000);
+        }
+        
+        function sendMessageToOwner(customerMessage) {
+            // Get customer info if available
+            const customerName = localStorage.getItem('customerName') || 'Anonymous Customer';
+            const customerEmail = localStorage.getItem('customerEmail') || 'No email provided';
+            
+            // Create email content
+            const subject = `New Chat Message from ${customerName}`;
+            const body = `
+New message from Blooming Beads website chat:
+
+Customer: ${customerName}
+Email: ${customerEmail}
+Message: ${customerMessage}
+
+Time: ${new Date().toLocaleString()}
+
+Please respond to this customer at: ${customerEmail}
+            `;
+            
+            // Create mailto link
+            const mailtoLink = `mailto:your-email@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            // Open email client
+            window.open(mailtoLink);
+            
+            // Also store the message for admin panel
+            const chatMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
+            chatMessages.push({
+                type: 'customer',
+                message: customerMessage,
+                timestamp: new Date().toISOString(),
+                customerName: customerName,
+                customerEmail: customerEmail
+            });
+            localStorage.setItem('chatMessages', JSON.stringify(chatMessages));
+        }
+        
+        function addMessage(text, sender) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            
+            messageDiv.innerHTML = `
+                <div class="message-content">
+                    <p>${text}</p>
+                    <div class="message-time">${timeString}</div>
+                </div>
+            `;
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Save chat messages
+            saveChatMessages();
+        }
+        
+        function handleChatKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+        
+        function saveChatMessages() {
+            const chatMessages = document.getElementById('chatMessages');
+            const messages = Array.from(chatMessages.children).map(msg => ({
+                type: msg.classList.contains('owner-message') ? 'owner' : 'customer',
+                content: msg.querySelector('p').textContent,
+                time: msg.querySelector('.message-time').textContent
+            }));
+            localStorage.setItem('chatMessages', JSON.stringify(messages));
+        }
+        
+        function loadChatMessages() {
+            const savedMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
+            const chatMessages = document.getElementById('chatMessages');
+            
+            // Clear existing messages except welcome messages
+            const welcomeMessages = chatMessages.querySelectorAll('.owner-message');
+            welcomeMessages.forEach(msg => msg.remove());
+            
+            // Load saved messages
+            savedMessages.forEach(msg => {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${msg.type}-message`;
+                messageDiv.innerHTML = `
+                    <div class="message-content">
+                        <p>${msg.content}</p>
+                        <div class="message-time">${msg.time}</div>
+                    </div>
+                `;
+                chatMessages.appendChild(messageDiv);
+            });
+            
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        // Admin Functions
+        function toggleAdminMode() {
+            const adminNav = document.getElementById('adminNav');
+            const adminMode = localStorage.getItem('adminMode');
+            
+            if (adminMode === 'true') {
+                // Hide admin mode
+                document.body.classList.remove('admin-mode-active');
+                adminNav.style.display = 'none';
+                localStorage.setItem('adminMode', 'false');
+            } else {
+                // Show admin mode
+                document.body.classList.add('admin-mode-active');
+                adminNav.style.display = 'block';
+                localStorage.setItem('adminMode', 'true');
+            }
+        }
+        
+        // Load chat messages on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadChatMessages();
+        });
+    </script>
+</body>
+</html>
+
