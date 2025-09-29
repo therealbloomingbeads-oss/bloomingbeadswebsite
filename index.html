@@ -24,14 +24,6 @@
                     <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
                 
-                <!-- Hidden Admin Navigation (only visible to admin) -->
-                <div class="admin-nav" id="adminNav" style="display: none;">
-                    <ul class="nav-menu">
-                        <li><a href="admin.html" class="nav-link admin-link">📊 Admin Panel</a></li>
-                        <li><a href="#custom-bracelets" class="nav-link admin-link">📝 View Orders</a></li>
-                        <li><a href="#" class="nav-link admin-link" onclick="toggleAdminMode()">🔒 Hide Admin</a></li>
-                    </ul>
-                </div>
                 <div class="hamburger">
                     <span class="bar"></span>
                     <span class="bar"></span>
@@ -41,8 +33,6 @@
         </nav>
     </header>
 
-    <!-- Secret Admin Trigger Button (invisible to customers) -->
-    <button class="admin-trigger" onclick="toggleAdminMode()" title="Admin Access"></button>
 
     <!-- Shopping Cart Button -->
     <div class="cart-container">
@@ -378,32 +368,10 @@
             }
         });
         
-        // Admin mode functionality
-        function toggleAdminMode() {
-            const body = document.body;
-            const adminNav = document.getElementById('adminNav');
-            
-            if (body.classList.contains('admin-mode-active')) {
-                // Hide admin mode
-                body.classList.remove('admin-mode-active');
-                adminNav.style.display = 'none';
-                localStorage.setItem('adminMode', 'false');
-            } else {
-                // Show admin mode
-                body.classList.add('admin-mode-active');
-                adminNav.style.display = 'block';
-                localStorage.setItem('adminMode', 'true');
-            }
-        }
         
-        // Check if admin mode should be active on page load
+        // Initialize page
         document.addEventListener('DOMContentLoaded', function() {
-            const adminMode = localStorage.getItem('adminMode');
-            if (adminMode === 'true') {
-                document.body.classList.add('admin-mode-active');
-                document.getElementById('adminNav').style.display = 'block';
-            }
-            
+            // Page initialization code here
         });
         
         // Handle custom order form
