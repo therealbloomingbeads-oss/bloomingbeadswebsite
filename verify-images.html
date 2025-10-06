@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Verification - Blooming Beads</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .image-item {
+            text-align: center;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+        .image-item img {
+            max-width: 150px;
+            max-height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .status {
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        .success { color: #28a745; }
+        .error { color: #dc3545; }
+        .loading { color: #ffc107; }
+        .filename {
+            font-family: monospace;
+            font-size: 0.9em;
+            color: #666;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Image Loading Verification for GitHub Pages</h1>
+        <p>This page tests all images used in the Blooming Beads website to ensure they load correctly on GitHub Pages.</p>
+        
+        <div id="results">
+            <h2>Loading Status</h2>
+            <div id="summary"></div>
+        </div>
+        
+        <div class="image-grid" id="imageGrid">
+            <!-- Images will be loaded dynamically -->
+        </div>
+    </div>
+
+    <script>
+        // List of all images used in the website
+        const imageList = [
+            // Logo and hero images
+            { src: 'images/logo.jpeg', name: 'Logo' },
+            { src: 'images/8779.jpg', name: 'Hero Image' },
+            
+            // Category images
+            { src: 'images/Rainbow-Claybead.jpeg', name: 'Rainbow Clay Bead' },
+            { src: 'images/Pearl-Set.jpeg', name: 'Pearl Set' },
+            
+            // Featured products from index.html
+            { src: 'images/Sunset-SeedBead.jpeg', name: 'Sunset Seed Bead' },
+            { src: 'images/Blue-White-SeedBead.jpeg', name: 'Blue White Seed Bead' },
+            { src: 'images/Pink-Bloom-ClayBead.jpeg', name: 'Pink Bloom Clay Bead' },
+            { src: 'images/Rainbow-Starfish-ClayBead.jpeg', name: 'Rainbow Starfish Clay Bead' },
+            
+            // Clay beads
+            { src: 'images/Berry-Claybead.jpeg', name: 'Berry Clay Bead' },
+            { src: 'images/Sunset-ClayBead.JPG', name: 'Sunset Clay Bead' },
+            { src: 'images/Diff-Shades-Blue-ClayBead.JPG', name: 'Different Shades Blue Clay Bead' },
+            { src: 'images/Pink-Lemonade_ClayBead.JPG', name: 'Pink Lemonade Clay Bead' },
+            { src: 'images/Purple-Yellow-Blue-Pink-heart-ClayBead.JPG', name: 'Purple Yellow Blue Pink Heart Clay Bead' },
+            { src: 'images/Blue-White-Star-ClayBead.JPG', name: 'Blue White Star Clay Bead' },
+            
+            // Glass beads
+            { src: 'images/Flash-Marvel-GlassBead.jpeg', name: 'Flash Marvel Glass Bead' },
+            { src: 'images/Hulk-Marvel-GlassBead.jpeg', name: 'Hulk Marvel Glass Bead' },
+            { src: 'images/Batman-Marvel-GlassBead.jpeg', name: 'Batman Marvel Glass Bead' },
+            { src: 'images/Spiderman-Marvel-GlassBead.jpeg', name: 'Spiderman Marvel Glass Bead' },
+            { src: 'images/Black-Panther-Marvel-Glass-Bead.jpeg', name: 'Black Panther Marvel Glass Bead' },
+            
+            // Pearl bracelets
+            { src: 'images/Blue-GummyBear-Pearl.jpeg', name: 'Blue Gummy Bear Pearl' },
+            { src: 'images/Purple-GummyBear-Pearl.jpeg', name: 'Purple Gummy Bear Pearl' },
+            { src: 'images/Extra-Small-Pearl.jpeg', name: 'Extra Small Pearl' },
+            { src: 'images/Small-Pearl.jpeg', name: 'Small Pearl' },
+            { src: 'images/Medium-Pearl.jpeg', name: 'Medium Pearl' },
+            { src: 'images/Large-Pearl.jpeg', name: 'Large Pearl' },
+            { src: 'images/Extra-Large-Pearl.jpeg', name: 'Extra Large Pearl' },
+            
+            // Loom bracelets
+            { src: 'images/Blue-Loom.jpeg', name: 'Blue Loom' },
+            { src: 'images/Purple-Loom.jpeg', name: 'Purple Loom' },
+            { src: 'images/Black-White-Loom.jpeg', name: 'Black White Loom' },
+            
+            // Seed bead bracelets
+            { src: 'images/Pink-White-SeedBead.jpeg', name: 'Pink White Seed Bead' },
+            { src: 'images/Yellow-White-SeedBead.jpeg', name: 'Yellow White Seed Bead' },
+            { src: 'images/Pink-Blue-White-SeedBead.jpeg', name: 'Pink Blue White Seed Bead' },
+            { src: 'images/Metalic-Pink-White-SeedBead.jpeg', name: 'Metallic Pink White Seed Bead' },
+            { src: 'images/Pink-Blue-SeedBead.jpeg', name: 'Pink Blue Seed Bead' },
+            { src: 'images/Red-Orange-SeedBead.jpeg', name: 'Red Orange Seed Bead' }
+        ];
+
+        let loadedCount = 0;
+        let errorCount = 0;
+        let totalCount = imageList.length;
+
+        function createImageElement(imageData) {
+            const imageItem = document.createElement('div');
+            imageItem.className = 'image-item';
+            
+            const img = document.createElement('img');
+            img.src = imageData.src;
+            img.alt = imageData.name;
+            
+            const status = document.createElement('div');
+            status.className = 'status loading';
+            status.textContent = 'Loading...';
+            
+            const filename = document.createElement('div');
+            filename.className = 'filename';
+            filename.textContent = imageData.src;
+            
+            const name = document.createElement('div');
+            name.textContent = imageData.name;
+            
+            img.addEventListener('load', function() {
+                status.className = 'status success';
+                status.textContent = '✅ Loaded';
+                loadedCount++;
+                updateSummary();
+            });
+            
+            img.addEventListener('error', function() {
+                status.className = 'status error';
+                status.textContent = '❌ Failed';
+                errorCount++;
+                updateSummary();
+            });
+            
+            imageItem.appendChild(img);
+            imageItem.appendChild(name);
+            imageItem.appendChild(status);
+            imageItem.appendChild(filename);
+            
+            return imageItem;
+        }
+
+        function updateSummary() {
+            const summary = document.getElementById('summary');
+            summary.innerHTML = `
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                    <h3>Loading Summary</h3>
+                    <p><strong>Total Images:</strong> ${totalCount}</p>
+                    <p><strong>Successfully Loaded:</strong> <span style="color: #28a745;">${loadedCount}</span></p>
+                    <p><strong>Failed to Load:</strong> <span style="color: #dc3545;">${errorCount}</span></p>
+                    <p><strong>Still Loading:</strong> <span style="color: #ffc107;">${totalCount - loadedCount - errorCount}</span></p>
+                </div>
+            `;
+        }
+
+        // Initialize the page
+        function init() {
+            const imageGrid = document.getElementById('imageGrid');
+            
+            imageList.forEach(imageData => {
+                const imageElement = createImageElement(imageData);
+                imageGrid.appendChild(imageElement);
+            });
+            
+            updateSummary();
+        }
+
+        // Start the verification
+        init();
+    </script>
+</body>
+</html>
