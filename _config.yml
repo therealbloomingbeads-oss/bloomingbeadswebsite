@@ -1,0 +1,24 @@
+# GitHub Pages Configuration
+# This file tells GitHub Pages to serve the site as static files
+
+# Disable Jekyll processing
+plugins: []
+
+# Set the base URL (replace with your actual GitHub Pages URL)
+# baseurl: "/your-repo-name"  # Uncomment and replace with your repo name if needed
+# url: "https://yourusername.github.io"  # Uncomment and replace with your GitHub username
+
+# Exclude files from processing
+exclude:
+  - README.md
+  - start-server.bat
+  - start-server.ps1
+  - create-placeholders.html
+  - open-directly.html
+
+# Include all other files
+include:
+  - "*.html"
+  - "*.css"
+  - "*.js"
+  - "images/"
